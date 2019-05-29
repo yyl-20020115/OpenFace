@@ -176,6 +176,9 @@ RecorderOpenFaceParameters::RecorderOpenFaceParameters(bool sequence, bool is_fr
 	// Default output code
 	this->output_codec = "DIVX";
 
+	this->image_format_aligned = "bmp";
+	this->image_format_visualization = "jpg";
+
 	this->output_2D_landmarks = output_2D_landmarks;
 	this->output_3D_landmarks = output_3D_landmarks;
 	this->output_model_params = output_model_params;
