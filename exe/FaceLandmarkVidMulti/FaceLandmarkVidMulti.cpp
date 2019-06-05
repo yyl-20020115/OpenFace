@@ -74,6 +74,42 @@ std::vector<std::string> get_arguments(int argc, char **argv)
 	return arguments;
 }
 
+double IOU(cv::Rect_<float> rect1, cv::Rect_<float> rect2)
+{
+	double intersection_area = (rect1 & rect2).area();
+	double union_area = rect1.area() + rect2.area() - intersection_area;
+	return intersection_area / union_area;
+}
+
+void RemoveOverlapingModels(std::vector<LandmarkDetector::CLNF>& face_models, std::vector<bool>& active_models)
+{
+	// Go over the model and eliminate detections that are not informative (there already is a tracker there)
+	for (size_t model1 = 0; model1 < active_models.size(); ++model1)
+	{
+		if (active_models[model1])
+		{
+			// See if the detections intersect
+			cv::Rect_<float> model1_rect = face_models[model1].GetBoundingBox();
+
+			for (int model2 = model1 + 1; model2 < active_models.size(); ++model2)
+			{
+				if(active_models[model2])
+				{
+					cv::Rect_<float> model2_rect = face_models[model2].GetBoundingBox();
+
+					// If the model is already tracking what we're detecting ignore the detection, this is determined by amount of overlap
+					if (IOU(model1_rect, model2_rect) > 0.5)
+					{
+						active_models[model1] = false;
+						face_models[model1].Reset();
+					}
+				}
+			}
+		}
+	}
+
+}
+
 void NonOverlapingDetections(const std::vector<LandmarkDetector::CLNF>& clnf_models, std::vector<cv::Rect_<float> >& face_detections)
 {
 
@@ -86,11 +122,8 @@ void NonOverlapingDetections(const std::vector<LandmarkDetector::CLNF>& clnf_mod
 
 		for (int detection = face_detections.size() - 1; detection >= 0; --detection)
 		{
-			double intersection_area = (model_rect & face_detections[detection]).area();
-			double union_area = model_rect.area() + face_detections[detection].area() - 2 * intersection_area;
-
 			// If the model is already tracking what we're detecting ignore the detection, this is determined by amount of overlap
-			if (intersection_area / union_area > 0.5)
+			if (IOU(model_rect, face_detections[detection]) > 0.5)
 			{
 				face_detections.erase(face_detections.begin() + detection);
 			}
@@ -311,6 +344,10 @@ int main(int argc, char **argv)
 					detection_success = LandmarkDetector::DetectLandmarksInVideo(rgb_image, face_models[model], det_parameters[model], grayscale_image);
 				}
 			}
+
+			// Remove models that end up tracking overlapping faces
+			// even if initial bounding boxes were not overlapping, they could have ended up converging to the same face
+			RemoveOverlapingModels(face_models, active_models);
 
 			// Keeping track of FPS
 			fps_tracker.AddFrame();
