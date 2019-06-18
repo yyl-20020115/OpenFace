@@ -19,7 +19,8 @@ SET(HEADERS
 	include/SequenceCapture.h
 	include/stdafx_ut.h
 	include/VisualizationUtils.h
-	include/Visualizer.h	
+	include/Visualizer.h
+	include/ConcurrentQueue.h
 )
 
 add_library( Utilities ${SOURCE} ${HEADERS})
