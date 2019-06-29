@@ -28,16 +28,17 @@ echo "Installing Essential dependencies..."
 sudo apt-get -y update
 sudo apt-get -y install build-essential
 sudo apt-get -y install cmake
+sudo apt-get -y install zip
 sudo apt-get -y install libopenblas-dev liblapack-dev
-sudo apt-get -y install git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-sudo apt-get -y install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
+sudo apt-get -y install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev
+sudo apt-get -y install libtbb2 libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
 echo "Essential dependencies installed."
 
 # OpenCV Dependency
 echo "Downloading OpenCV..."
-wget https://github.com/opencv/opencv/archive/4.0.0.zip
-unzip 4.0.0.zip
-cd opencv-4.0.0
+wget https://github.com/opencv/opencv/archive/4.1.0.zip
+unzip 4.1.0.zip
+cd opencv-4.1.0
 mkdir -p build
 cd build
 echo "Installing OpenCV..."
@@ -45,8 +46,8 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB
 make -j4
 sudo make install
 cd ../..
-rm 4.0.0.zip
-sudo rm -r opencv-4.0.0
+rm 4.1.0.zip
+sudo rm -r opencv-4.1.0
 echo "OpenCV installed."
 
 # dlib dependecy
@@ -64,11 +65,6 @@ sudo ldconfig;
 cd ../..;    
 rm -r dlib-19.13.tar.bz2
 echo "dlib installed"
-
-# Boost C++ Dependency
-echo "Installing Boost..."
-sudo apt-get install libboost-all-dev
-echo "Boost installed."
 
 # OpenFace installation
 echo "Installing OpenFace..."
