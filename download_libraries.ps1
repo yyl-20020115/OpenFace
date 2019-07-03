@@ -30,11 +30,11 @@ if(!(Test-Path $out_dir))
 	New-Item -ItemType directory -Path $out_dir
 }
 
-if(!([System.IO.File]::Exists( (Join-Path (Get-Location) $destination) )))
-{
-	$source = "https://www.dropbox.com/s/c81shi8br57xytv/opencv_world410.dll?dl=1"
-	Invoke-WebRequest $source -OutFile $destination
-}
+#if(!([System.IO.File]::Exists( (Join-Path (Get-Location) $destination) )))
+#{
+#	$source = "https://www.dropbox.com/s/c81shi8br57xytv/opencv_world410.dll?dl=1"
+#	Invoke-WebRequest $source -OutFile $destination
+#}
 
 if(!([System.IO.File]::Exists( (Join-Path (Get-Location) $destination) )))
 {
@@ -51,11 +51,11 @@ if(!(Test-Path $out_dir))
 	New-Item -ItemType directory -Path $out_dir
 }
 
-if(!([System.IO.File]::Exists( (Join-Path (Get-Location) $destination) )))
-{
-	$source = "https://www.dropbox.com/s/8a4kmvpj5a09jdz/opencv_world410d.dll?dl=1"
-	Invoke-WebRequest $source -OutFile $destination
-}
+#if(!([System.IO.File]::Exists( (Join-Path (Get-Location) $destination) )))
+#{
+#	$source = "https://www.dropbox.com/s/8a4kmvpj5a09jdz/opencv_world410d.dll?dl=1"
+#	Invoke-WebRequest $source -OutFile $destination
+#}
 
 if(!([System.IO.File]::Exists( (Join-Path (Get-Location) $destination) )))
 {
