@@ -1,16 +1,13 @@
 #!/bin/bash
 #==============================================================================
 # Title: install.sh
-# Description: Install everything necessary for OpenFace to compile.
-# Author: Daniyal Shahrokhian <daniyal@kth.se>
-# Date: 20170428
-# Version : 1.02
+# Description: Install everything necessary for OpenFace to compile. 
+# Will install all required dependencies, only use if you do not have the dependencies
+# already installed or if you don't mind specific versions of gcc,g++,cmake,opencv etc. installed
+# Author: Daniyal Shahrokhian <daniyal@kth.se>, Tadas Baltrusaitis <tadyla@gmail.com>
+# Date: 20190630
+# Version : 1.03
 # Usage: bash install.sh
-# NOTES: There are certain steps to be taken in the system before installing 
-#        via this script (refer to README): Run 
-#        `sudo gedit /etc/apt/sources.list` and change the line 
-#        `deb http://us.archive.ubuntu.com/ubuntu/ xenial main restricted` to 
-#        `deb http://us.archive.ubuntu.com/ubuntu/ xenial main universe`
 #==============================================================================
 
 # Exit script if any command fails
@@ -25,9 +22,36 @@ fi
 
 # Essential Dependencies
 echo "Installing Essential dependencies..."
+
+# If we're not on 18.04
 sudo apt-get -y update
+
+if [[ `lsb_release -rs` != "18.04" ]]
+  then   
+    echo "Adding ppa:ubuntu-toolchain-r/test apt-repository "
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+    sudo apt-get -y update
+fi
+
 sudo apt-get -y install build-essential
-sudo apt-get -y install cmake
+sudo apt-get -y install gcc-8 g++-8
+
+# Ubuntu 16.04 does not have newest CMake so need to build it manually
+if [[ `lsb_release -rs` != "18.04" ]]; then   
+  mkdir -p cmake_tmp
+  cd cmake_tmp
+  wget https://cmake.org/files/v3.10/cmake-3.10.1.tar.gz
+  tar -xzvf cmake-3.10.1.tar.gz
+  cd cmake-3.10.1/
+  ./bootstrap
+  make -j4
+  sudo make install
+  cd ../..
+  sudo rm -r cmake_tmp
+else
+  sudo apt-get -y install cmake
+fi
+
 sudo apt-get -y install zip
 sudo apt-get -y install libopenblas-dev liblapack-dev
 sudo apt-get -y install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev
@@ -70,7 +94,7 @@ echo "dlib installed"
 echo "Installing OpenFace..."
 mkdir -p build
 cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE ..
+cmake -D CMAKE_CXX_COMPILER=g++-8 -D CMAKE_C_COMPILER=gcc-8 -D CMAKE_BUILD_TYPE=RELEASE ..
 make
 cd ..
 echo "OpenFace successfully installed."
