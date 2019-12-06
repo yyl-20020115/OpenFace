@@ -344,19 +344,14 @@ cv::Mat ImageCapture::GetNextImage()
 {
 	if (image_files.empty() || frame_num >= image_files.size())
 	{
-		// Indicate lack of success by returning an empty image
+		// Indicate that all images have been read using no_input_specified flag
+		no_input_specified = true;
 		latest_frame = cv::Mat();
 		return latest_frame;
 	}
 		
 	// Load the image as an 8 bit RGB
 	latest_frame = cv::imread(image_files[frame_num], cv::IMREAD_COLOR);
-
-	if (latest_frame.empty())
-	{
-		ERROR_STREAM("Could not open the image: " + image_files[frame_num]);
-		exit(1);
-	}
 
 	image_height = latest_frame.size().height;
 	image_width = latest_frame.size().width;

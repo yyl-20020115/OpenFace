@@ -90,6 +90,8 @@ namespace Utilities
 
 		bool has_bounding_boxes;
 
+		bool no_input_specified;
+
 	private:
 
 		// Blocking copy and move, as it doesn't make sense to have several readers pointed at the same source
@@ -114,7 +116,6 @@ namespace Utilities
 		bool image_focal_length_set;
 		bool image_optical_center_set;
 
-		bool no_input_specified;
 
 	};
 }

@@ -110,7 +110,7 @@ namespace Utilities
 		// Allows to differentiate if failed because no input specified or if failed to open a specified input
 		bool no_input_specified;
 
-				// Storing the captured data queue
+		// Storing the captured data queue
 		static const int CAPTURE_CAPACITY = 200; // 200 MB
 
 	private:

@@ -132,13 +132,13 @@ int main(int argc, char **argv)
 		std::cout << "WARNING: no eye model found" << std::endl;
 	}
 
-	if (face_analyser.GetAUClassNames().size() == 0 && face_analyser.GetAUClassNames().size() == 0)
+	if (face_analyser.GetAUClassNames().size() == 0 && face_analyser.GetAURegNames().size() == 0)
 	{
 		std::cout << "WARNING: no Action Unit models found" << std::endl;
 	}
 
 	std::cout << "Starting tracking" << std::endl;
-	while (!rgb_image.empty())
+	while (!image_reader.no_input_specified)
 	{
 	
 		Utilities::RecorderOpenFaceParameters recording_params(arguments, false, false,
@@ -149,6 +149,17 @@ int main(int argc, char **argv)
 			recording_params.setOutputGaze(false);
 		}
 		Utilities::RecorderOpenFace open_face_rec(image_reader.name, recording_params, arguments);
+
+		// Skip corrupt images
+		if (rgb_image.empty())
+		{
+			std::cout << "ERROR: Could not open the image: " + image_reader.name;
+			open_face_rec.Close();
+
+			// Grabbing the next frame in the sequence
+			rgb_image = image_reader.GetNextImage();
+			continue;
+		}
 
 		visualizer.SetImage(rgb_image, image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy);
 

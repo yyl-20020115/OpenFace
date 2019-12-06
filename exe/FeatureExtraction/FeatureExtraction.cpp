@@ -133,8 +133,19 @@ int main(int argc, char **argv)
 	{
 
 		// The sequence reader chooses what to open based on command line arguments provided
-		if (!sequence_reader.Open(arguments))
+		bool sequence_opened = sequence_reader.Open(arguments);
+
+		if (sequence_reader.no_input_specified)
+		{
+			INFO_STREAM("No more sequences to read");
 			break;
+		}
+
+		if (!sequence_opened)
+		{
+			ERROR_STREAM("Opening a sequence failed");
+			continue;
+		}
 
 		INFO_STREAM("Device or file opened");
 
