@@ -197,13 +197,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\local\CppInerop\CppInerop.vcxproj">
-      <Project>{78196985-ee54-411f-822b-5a23edf80642}</Project>
-      <Name>CppInerop</Name>
-    </ProjectReference>
+    <Resource Include="logo1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="logo1.ico" />
+    <ProjectReference Include="..\..\lib\local\CppInerop\CppInerop.vcxproj">
+      <Project>{78196985-ee54-411f-822b-5a23edf80642}</Project>
+      <Name>CppInterop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

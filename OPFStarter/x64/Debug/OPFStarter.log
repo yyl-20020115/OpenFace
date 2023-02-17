@@ -1,0 +1,10 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(CppInerop.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  pch.cpp
+  AssemblyInfo.cpp
+  OPFStarter.cpp
+C:\Working\OpenFace\OPFStarter\OPFStarter.cpp(2,8): warning C4364: 程序集“CppInterop”(以前在 C:\Working\OpenFace\OPFStarter\pch.cpp(0)处看到)的 #using 没有 as_friend 特性；未应用 as_friend
+C:\Working\OpenFace\OPFStarter\OPFStarter.cpp(2,8): message : 已经从命令行(/FU)中导入了程序集“CppInterop”: 忽略 as_friend
+  正在生成代码...
+  .NETFramework,Version=v4.8.AssemblyAttributes.cpp
+  AssemblyInfo.obj : 遇到了 MSIL 模块；对 MSIL 禁用了增量链接；正在执行完全链接
+  OPFStarter.vcxproj -> C:\Working\OpenFace\x64\Debug\OPFStarter.exe

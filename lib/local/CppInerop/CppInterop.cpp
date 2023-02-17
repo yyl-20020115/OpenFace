@@ -42,3 +42,11 @@
 #include "RecorderInterop.h"
 #include "VisualizerInterop.h"
 #include "SequenceReader.h"
+
+public ref class TestClass
+{
+public:
+	static void DoTest(System::String^ mystring) {
+		System::Console::WriteLine(mystring);
+	}
+};

@@ -144,7 +144,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\lib\local\CppInerop\CppInerop.vcxproj">
       <Project>{78196985-ee54-411f-822b-5a23edf80642}</Project>
-      <Name>CppInerop</Name>
+      <Name>CppInterop</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenFaceDemo\OpenFaceDemo.csproj">
       <Project>{e143a2aa-312e-4dfe-b61d-9a87ccbc8e90}</Project>

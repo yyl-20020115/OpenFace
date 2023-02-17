@@ -130,13 +130,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\lib\local\CppInerop\CppInerop.vcxproj">
+      <Project>{78196985-ee54-411f-822b-5a23edf80642}</Project>
+      <Name>CppInterop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenFaceOffline\OpenFaceOffline.csproj">
       <Project>{a4760f41-2b1f-4144-b7b2-62785affe79b}</Project>
       <Name>OpenFaceOffline</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\local\CppInerop\CppInerop.vcxproj">
-      <Project>{78196985-ee54-411f-822b-5a23edf80642}</Project>
-      <Name>CppInerop</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

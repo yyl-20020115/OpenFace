@@ -1,0 +1,3 @@
+C:\Working\OpenFace\OPFStarter\x64\Debug\OPFStarter.vcxproj.AssemblyReference.cache
+C:\Working\OpenFace\OPFStarter\x64\Debug\OPFStarter.vcxproj.SuggestedBindingRedirects.cache
+C:\Working\OpenFace\OPFStarter\x64\Debug\OPFStarter.vcxproj.CopyComplete
