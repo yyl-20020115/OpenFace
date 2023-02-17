@@ -9,7 +9,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\3rdParty\OpenCV\$(PlatformTarget)\$(PlatformToolset)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world410.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>E:/opencv/build/x64/vc16/lib/opencv_world470.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /E /Y /D /C "$(SolutionDir)lib\3rdParty\OpenCV\$(PlatformTarget)\$(PlatformToolset)\bin\$(Configuration)" "$(OutDir)"
